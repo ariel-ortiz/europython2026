@@ -1,0 +1,35 @@
+= Required Software
+
+For this tutorial, we will need Python 3.14 and _wasmtime_ installed on your system.
+
+For most users, the standard package manager `pip` is the way to go. Open your terminal or command prompt and run:
+
+[source,bash]
+pip install wasmtime
+
+Sometimes the pip command doesn't work. Use this specific command if the one above fails:
+
+[source,bash]
+python -m pip install wasmtime
+
+TIP: If the standard commands fail, try using `pip3` or `python3`. Some environments, particularly on macOS and Linux, use the 3 suffix to distinguish the modern interpreter from legacy system versions and prevent version conflicts.
+
+Run the following command at the terminal to verify that Wasmtime was successfully installed:
+
+[source,bash]
+python -c "import wasmtime; print('Wasmtime installed successfully')"
+
+If everything is OK, you should see the message `Wasmtime installed successfully` printed in your terminal.
+
+.Wasmtime Platform Support
+[WARNING]
+====
+Wasmtime is designed for 64-bit operating systems and supports the following environments:
+
+* *macOS:* Fully supported on `x86_64` (Intel) and `aarch64` (Apple Silicon).
+* *Linux:* Fully supported on `x86_64` (Intel/AMD) and `aarch64` (ARM64).
+* *Windows:* Fully supported natively on `x86_64` (Intel/AMD). +
+Native (bare-metal) Windows ARM64 (for example, Qualcomm Snapdragon) is not currently supported. However, Wasmtime does work perfectly on Windows ARM64 devices when run inside WSL (Windows Subsystem for Linux), as it leverages the fully supported Linux `aarch64` architecture.
+
+Note that Wasmtime does not support legacy 32-bit platforms (such as 32-bit ARM or x86).
+====
