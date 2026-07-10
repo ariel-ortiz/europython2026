@@ -1,4 +1,6 @@
-= Required Software
+= Crafting Your Own Compiler: From Python Logic to High-Speed WebAssembly
+
+== Required Software
 
 For this tutorial, we will need Python 3.14 and _wasmtime_ installed on your system.
 
