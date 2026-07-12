@@ -1,5 +1,9 @@
 = Crafting Your Own Compiler: From Python Logic to High-Speed WebAssembly
 
+== Tutorial Notes
+
+The complete tutorial notes are available at: http://arielortiz.info/europython2026
+
 == Required Software
 
 For this tutorial, we will need Python 3.14 and _wasmtime_ installed on your system.
