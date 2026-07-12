@@ -1,5 +1,7 @@
 = Crafting Your Own Compiler: From Python Logic to High-Speed WebAssembly
 
+Tutorial @ https://ep2026.europython.eu/[EuroPython 2026]. July 13, 2026. Kraków, Poland.
+
 == Tutorial Notes
 
 The complete tutorial notes are available at: http://arielortiz.info/europython2026
