@@ -64,6 +64,15 @@ def is_number(token):
     return token.removeprefix('-').isdigit()
 
 
+def find_vars_used(tokens):
+    names = set()
+    for token in tokens:
+        name = token[:-1] if token[-1] == '!' else token
+        if is_var_name(name):
+            names.add(name)
+    return names
+
+
 def main():
     print(remove_comments(read_words(get_source_filepath())))
 
