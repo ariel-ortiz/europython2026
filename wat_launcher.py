@@ -32,3 +32,6 @@ if __name__ == '__main__':
     print(call_wat_fun('example.wat', 'fah_to_cel', 212.0))
     print(call_wat_fun('example.wat', 'fah_to_cel', 32.0))
     print(call_wat_fun('example.wat', 'fah_to_cel', -40.0))
+    print(call_wat_fun('example.wat', 'quadratic_root', 2.0, 4.0, 2.0))
+    print(call_wat_fun('example.wat', 'quadratic_root', 1.0, 0.0, 0.0))
+    print(call_wat_fun('example.wat', 'quadratic_root', 4.0, 5.0, 1.0))

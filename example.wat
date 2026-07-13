@@ -36,4 +36,28 @@
     f64.const 9.0
     f64.div
   )
+  (func
+    (export "quadratic_root")
+    (param $a f64)
+    (param $b f64)
+    (param $c f64)
+    (result f64)
+    local.get $b
+    f64.neg
+    local.get $b
+    local.get $b
+    f64.mul
+    f64.const 4.0
+    local.get $a
+    f64.mul
+    local.get $c
+    f64.mul
+    f64.sub
+    f64.sqrt
+    f64.add
+    f64.const 2.0
+    local.get $a
+    f64.mul
+    f64.div
+  )
 )
