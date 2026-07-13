@@ -73,6 +73,13 @@ def find_vars_used(tokens):
     return names
 
 
+def declare_vars(vars):
+    result = []
+    for var in sorted(vars):
+        result.append(f'    (local ${var} i32)')
+    return result
+
+
 def main():
     print(remove_comments(read_words(get_source_filepath())))
 
