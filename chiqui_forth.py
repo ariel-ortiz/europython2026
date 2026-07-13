@@ -59,6 +59,11 @@ def is_var_name(token):
             and token.isalnum()
             and token not in OPERATION)
 
+
+def is_number(token):
+    return token.removeprefix('-').isdigit()
+
+
 def main():
     print(remove_comments(read_words(get_source_filepath())))
 
