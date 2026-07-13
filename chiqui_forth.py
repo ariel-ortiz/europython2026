@@ -1,4 +1,7 @@
+from os.path import splitext
 from sys import argv, stderr, exit
+from wasmtime import wat2wasm
+
 
 def get_source_filepath():
     if (len(argv) != 2):
@@ -80,8 +83,59 @@ def declare_vars(vars):
     return result
 
 
+def code_generation(tokens):
+    result = []
+    for token in tokens:
+        if is_number(token):
+            result.append(f'    i32.const {token}')
+        elif token in OPERATION:
+            for statement in OPERATION[token]:
+                result.append(f'    {statement}')
+        elif is_var_name(token):
+            result.append(f'    local.get ${token}')
+        elif token[-1] == '!' and is_var_name(token[:-1]):
+            result.append(f'    local.set ${token[:-1]}')
+        else:
+            print(f"Error: '{token}' is not a valid word.",
+                  file=stderr)
+            exit(1)
+    return result
+
+
+WAT_TEMPLATE = ''';; chiqui_forth compiler WAT output
+
+(module
+  (import "forth" "emit" (func $emit (param i32)))
+  (import "forth" "input" (func $input (result i32)))
+  (import "forth" "print" (func $print (param i32)))
+  (func (export "_start")
+{}
+  )
+)'''
+
+
+def create_target_files(source_path, compiled_lines):
+    base_name, _ = splitext(source_path)
+    wat_source = WAT_TEMPLATE.format('\n'.join(compiled_lines))
+    with open(f'{base_name}.wat', 'w') as file:
+        file.write(wat_source)
+    with open(f'{base_name}.wasm', 'wb') as file:
+        file.write(wat2wasm(wat_source))
+
+
 def main():
-    print(remove_comments(read_words(get_source_filepath())))
+    """Control all the steps carried out by the compiler."""
+
+    # === FRONT END ===
+    source_path = get_source_filepath()
+    raw_tokens = read_words(source_path)
+    tokens = remove_comments(raw_tokens)
+
+    # === BACK END ===
+    variable_declarations = declare_vars(find_vars_used(tokens))
+    instruction_body = code_generation(tokens)
+    compiled_lines = variable_declarations + instruction_body
+    create_target_files(source_path, compiled_lines)
 
 
 if __name__ == '__main__':

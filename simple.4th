@@ -1,2 +1,2 @@
 ( a very simple example )
-1 2 + .
+1 2 + 4 * .
