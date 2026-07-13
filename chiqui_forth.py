@@ -41,6 +41,24 @@ def remove_comments(tokens):
     return result
 
 
+OPERATION = {
+    '*': ['i32.mul'],
+    '+': ['i32.add'],
+    '.': ['call $print'],
+    'emit': ['call $emit'],
+    'input': ['call $input'],
+    'nl': [
+        'i32.const 10',
+        'call $emit'
+    ],
+}
+
+
+def is_var_name(token):
+    return (token[0].isalpha()
+            and token.isalnum()
+            and token not in OPERATION)
+
 def main():
     print(remove_comments(read_words(get_source_filepath())))
 
